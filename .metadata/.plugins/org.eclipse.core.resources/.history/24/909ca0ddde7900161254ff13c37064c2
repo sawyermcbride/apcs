@@ -1,0 +1,69 @@
+import java.util.Scanner;
+interface rates {
+	int incomeStart = 0, incomeEnd = 0;
+	double base = 0, marginal = 0;
+}
+public class IRS {
+	int maritalStatus = 0;
+	double taxableIncome = 0.0;
+	SingleRate[] sRates = new SingleRate[5];
+	MarriedRate[] mRates = new MarriedRate[5];
+	Scanner s = new Scanner(System.in);
+	//using the interface for polymorphism so I can have the same type for each sub class
+	private class SingleRate implements rates {
+		int incomeStart = 0, incomeEnd = 0;
+		double base = 0, marginal = 0;
+		SingleRate(int incomeStart, int incomeEnd, double base, double marginal) {
+			this.incomeEnd = incomeEnd;
+			this.incomeStart = incomeStart;
+			this.base = base;
+			this.marginal = marginal;
+		}
+	}
+	private class MarriedRate implements rates{
+		int incomeStart = 0, incomeEnd = 0;
+		double base = 0, marginal = 0;
+		MarriedRate(int incomeStart, int incomeEnd, double base, double marginal) {
+			this.incomeEnd = incomeEnd;
+			this.incomeStart = incomeStart;
+			this.base = base;
+			this.marginal = marginal;
+		}
+	}
+	
+	public IRS() {
+		sRates[0] = new SingleRate(0,27050,0,.15);
+		sRates[1] = new SingleRate(27050,65550,4057.50,.275);
+		sRates[2] = new SingleRate(65550,136750,14645,.305);
+		sRates[3] = new SingleRate(136750,297350,36361,.355);
+		sRates[4] = new SingleRate(297350,1000000000,93374,.391);
+		
+		mRates[0] = new MarriedRate(0,45200,0,.15);
+		mRates[1] = new MarriedRate(45200,109250,6780,.275);
+		mRates[2] = new MarriedRate(109250,166500,24393.75,.305);
+		mRates[3] = new MarriedRate(166500,297350,41855,.355);
+		mRates[4] = new MarriedRate(297350,1000000000,88306,.391);
+	}
+	public void GetInfo() {
+		System.out.println("Enter marital status (1=single, 2=married):");
+		maritalStatus = s.nextInt();
+		System.out.println("Enter taxable income: $");
+		taxableIncome = s.nextDouble();
+	}
+	private double CalcTax() {
+		rates[] arr = (maritalStatus == 1 ? sRates : mRates);
+		double amount = 0;
+		for(int i = 0; i < arr.length; i++) {
+			System.out.println(arr[i]);
+			if(taxableIncome >= arr[i].incomeStart && taxableIncome < arr[i].incomeEnd) {
+				amount = arr[i].base+(taxableIncome-arr[i].incomeStart)*arr[i].marginal;
+			}
+		}
+		return amount;
+	}
+	public void DisplayData() {
+		System.out.println("Filing status: " );
+		System.out.println("Your Federal tax = $" + CalcTax());
+
+	}
+}

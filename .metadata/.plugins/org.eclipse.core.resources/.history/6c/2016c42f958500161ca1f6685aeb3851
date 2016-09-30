@@ -1,0 +1,9 @@
+package algorithms;
+class Graph {
+	private HashMap<String, Vertex> vertices; //adjecency list, vertex label and its adjectent vertices
+	private HashMap<Integer, Edge> edges;
+	public Graph() {
+		
+	}
+	
+}

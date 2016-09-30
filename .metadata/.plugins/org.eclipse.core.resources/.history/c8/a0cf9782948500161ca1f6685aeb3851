@@ -1,0 +1,7 @@
+package algorithms;
+class Graph {
+	public Graph() {
+		
+	}
+	
+}

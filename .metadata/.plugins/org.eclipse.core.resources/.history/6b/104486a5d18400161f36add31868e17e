@@ -1,0 +1,102 @@
+import java.util.regex.Pattern;
+
+public class StringUtil {
+	// This constant contains all of the characters that should be removed
+	// from a string before it is checked to see if it is a palindrome
+	private static final String CHARS_TO_REMOVE = " \'\".,!?;:-";
+	// This constant contains the vowels that should be used when converting
+	// a phrase to Pig Latin and when converting a phrase into shorthand
+	private static final String VOWELS_TO_USE = "aAeEiIoOuU";
+
+	// This public method reverses all of the characters in a phrase
+	public static String Reverse(String phrase)
+	{
+		String s = "";
+		for(int i = phrase.length()-1; i >= 0;i--)
+			s+=phrase.charAt(i);
+		return s;
+	}
+
+	// This public method determines whether or not a phrase is a palindrome
+	public static boolean Palindrome(String phrase)
+	{
+		phrase = CleanUp(phrase);
+		String reversedPhrase = Reverse(phrase);
+		return reversedPhrase.equals(phrase)
+	}
+
+	// This public method converts a phrase into Pig Latin
+	public static String PigLatin(String phrase)
+	{
+		return Separate(phrase);
+	}
+
+	// This public method converts a phrase into shorthand
+	public static String Shorthand(String phrase)
+	{
+	[Put Your Code Here. You MUST use the 'Replace' method below.]
+	}
+
+	// This method converts a single word into Pig Latin; the word MUST NOT contain any spaces
+	private static String Latinate(String word)
+	{
+		// First Pig Latin rule: If the word does not contain any vowels
+		// (a-A-e-E-i-I-o-O-u-U), just add "ay" to the end of the word
+		[Put Your Code Here.]
+		// Second Pig Latin rule (to be followed only if the first rule does not apply): If
+		// the first letter in the word is a vowel, just add "yay" to the end of the word
+		[Put Your Code Here.]
+		// Third Pig Latin rule (to be followed only if the above two rules do not apply): Move all
+		// leading consonants to the back of the word, and then add "ay" to the end of the new word
+		[Put Your Code Here.]
+		// Final Pig Latin rule (to be followed after the above third rule): If the original word started
+		// with a capital letter, make it lowercase and instead capitalize the first letter of the new word
+		[Put Your Code Here.]
+	}
+
+	// This recursive method breaks a phrase into its individual words/parts, has each word
+	// converted to Pig Latin, and then rebuilds the string as the recursion is finished
+	private static String Separate(String phrase)
+	{
+//	[Put Your Code Here. You MUST use recursion and call 'Latinate'.]
+		if(phrase.indexOf(" ") ==-1)
+			return Latinate(phrase);
+		else {
+			return Separate(phrase.substring(phrase.indexOf(" ")));
+		}
+	}
+
+	// This method removes all punctuation (and other unwanted characters)
+	// from a phrase and converts the phrase to all lowercase characters
+	private static String CleanUp(String phrase) {
+	
+	}
+
+	// This method replaces every occurrence of one string with another string within
+	// a specific phrase WITHOUT using the 'replace()' method of the 'String' class
+	private static String Replace(String x, String y, String phrase)
+	{
+	[Put Your Code Here.]
+	}}
+
+	Sample Calling Class for
+
+	StringUtil() Class
+	public class A10_StringUtil
+	{
+	public static void main(String[] args)
+	{
+	// Test the phrase reverser
+	System.out.println(StringUtil.Reverse("I like computers!"));
+	// Test the palindrome checker
+	System.out.println(StringUtil.Palindrome("radar"));
+	System.out.println(StringUtil.Palindrome("J"));
+	System.out.println(StringUtil.Palindrome("Lewd did I live, & evil I did dwel."));
+	System.out.println(StringUtil.Palindrome("I like Java"));
+	System.out.println(StringUtil.Palindrome("Straw? No, too stupid a fad, I put soot on warts."));
+	// Test the Pig Latin converter
+	System.out.println(StringUtil.PigLatin("Why do they think you and Sheena should return immediately?"));
+	// Test the shorthand converter
+	System.out.println(StringUtil.Shorthand("You and she should not go to the party, for you will be bored!"));
+	}
+}
